@@ -276,6 +276,10 @@ static llvm::cl::opt< analyzer::MachineIntDomainOption > Domain(
                    machine_int_domain_option_str(
                        analyzer::MachineIntDomainOption::ApronPplPolyhedra),
                    "APRON PPL Polyhedra domain"),
+        clEnumValN(analyzer::MachineIntDomainOption::ApronPplitePolyhedra,
+                   machine_int_domain_option_str(
+                       analyzer::MachineIntDomainOption::ApronPplitePolyhedra),
+                   "APRON PPLite Polyhedra domain"),
         clEnumValN(
             analyzer::MachineIntDomainOption::ApronPplLinearCongruences,
             machine_int_domain_option_str(
@@ -307,6 +311,11 @@ static llvm::cl::opt< analyzer::MachineIntDomainOption > Domain(
             machine_int_domain_option_str(
                 analyzer::MachineIntDomainOption::VarPackApronPplPolyhedra),
             "APRON PPL Polyhedra domain with variable packing"),
+        clEnumValN(
+            analyzer::MachineIntDomainOption::VarPackApronPplitePolyhedra,
+            machine_int_domain_option_str(
+                analyzer::MachineIntDomainOption::VarPackApronPplitePolyhedra),
+            "APRON PPLite Polyhedra domain with variable packing"),
         clEnumValN(
             analyzer::MachineIntDomainOption::VarPackApronPplLinearCongruences,
             machine_int_domain_option_str(analyzer::MachineIntDomainOption::

@@ -51,6 +51,7 @@
 #include <ap_global0.h>
 #include <ap_pkgrid.h>
 #include <ap_ppl.h>
+#include <ap_pplite.h>
 #include <box.h>
 #include <oct.h>
 #include <pk.h>
@@ -184,6 +185,7 @@ enum Domain {
   PolkaPolyhedra,
   PolkaLinearEqualities,
   PplPolyhedra,
+  PplitePolyhedra,
   PplLinearCongruences,
   PkgridPolyhedraLinCongruences,
 };
@@ -200,6 +202,8 @@ inline const char* domain_name(Domain d) {
       return "APRON NewPolka Linear Equalities";
     case PplPolyhedra:
       return "APRON PPL Convex Polyhedra";
+    case PplitePolyhedra:
+      return "APRON PPLite Convex Polyhedra";
     case PplLinearCongruences:
       return "APRON PPL Linear Congruences";
     case PkgridPolyhedraLinCongruences:
@@ -222,6 +226,8 @@ inline ap_manager_t* alloc_domain_manager(Domain d) {
       return pkeq_manager_alloc();
     case PplPolyhedra:
       return ap_ppl_poly_manager_alloc(false);
+    case PplitePolyhedra:
+      return ap_pplite_poly_manager_alloc(false);
     case PplLinearCongruences:
       return ap_ppl_grid_manager_alloc();
     case PkgridPolyhedraLinCongruences:
@@ -483,7 +489,12 @@ private:
     ap_coeff_t* coeff = ap_linexpr0_cstref(expr);
     LinearExpressionT e(apron::to_ikos_number< Number >(coeff, false));
 
+    const auto expr_size = ap_linexpr0_size(expr);
     for (auto it = _var_map.begin(), et = _var_map.end(); it != et; ++it) {
+      if (it->second >= expr_size) {
+        continue;
+      }
+
       coeff = ap_linexpr0_coeffref(expr, it->second);
 
       if (ap_coeff_zero(coeff)) {

@@ -222,6 +222,7 @@ add_executable(ikos-analyzer
   src/analysis/value/machine_int_domain/apron_polka_polyhedra.cpp
   src/analysis/value/machine_int_domain/apron_ppl_linear_congruences.cpp
   src/analysis/value/machine_int_domain/apron_ppl_polyhedra.cpp
+  src/analysis/value/machine_int_domain/apron_pplite_polyhedra.cpp
   src/analysis/value/machine_int_domain/congruence.cpp
   src/analysis/value/machine_int_domain/dbm.cpp
   src/analysis/value/machine_int_domain/gauge.cpp
@@ -234,6 +235,7 @@ add_executable(ikos-analyzer
   src/analysis/value/machine_int_domain/var_pack_apron_polka_polyhedra.cpp
   src/analysis/value/machine_int_domain/var_pack_apron_ppl_linear_congruences.cpp
   src/analysis/value/machine_int_domain/var_pack_apron_ppl_polyhedra.cpp
+  src/analysis/value/machine_int_domain/var_pack_apron_pplite_polyhedra.cpp
   src/analysis/value/machine_int_domain/var_pack_dbm.cpp
   src/analysis/value/machine_int_domain/var_pack_dbm_congruence.cpp
   src/analysis/variable.cpp

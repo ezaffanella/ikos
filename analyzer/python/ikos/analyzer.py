@@ -631,11 +631,13 @@ domains_without_narrowing = (
     'apron-polka-polyhedra',
     'apron-polka-linear-equalities',
     'apron-ppl-polyhedra',
+    'apron-pplite-polyhedra',
     'apron-ppl-linear-congruences',
     'apron-pkgrid-polyhedra-lin-cong',
     'var-pack-apron-polka-polyhedra',
     'var-pack-apron-polka-linear-equalities',
     'var-pack-apron-ppl-polyhedra',
+    'var-pack-apron-pplite-polyhedra',
     'var-pack-apron-ppl-linear-congruences',
     'var-pack-apron-pkgrid-polyhedra-lin-cong',
 )

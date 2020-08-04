@@ -58,6 +58,8 @@ if (NOT APRON_FOUND)
   find_package(GMP)
   find_package(MPFR)
   find_package(PPL)
+  find_package(FLINT)
+  find_package(PPLite)
 
   find_path(APRON_INCLUDE_DIR
     NAMES ap_abstract0.h
@@ -95,6 +97,12 @@ if (NOT APRON_FOUND)
     DOC "Path to apron ap_ppl library"
   )
 
+  find_library(APRON_PPLITE_LIB
+    NAMES ap_pplite
+    HINTS ${APRON_LIBRARY_SEARCH_DIRS}
+    DOC "Path to apron ap_pplite library"
+  )
+
   find_library(APRON_PKGRID_LIB
     NAMES ap_pkgrid
     HINTS ${APRON_LIBRARY_SEARCH_DIRS}
@@ -110,6 +118,7 @@ if (NOT APRON_FOUND)
       APRON_OCT_LIB
       APRON_POLKA_LIB
       APRON_PPL_LIB
+      APRON_PPLITE_LIB
       APRON_PKGRID_LIB
       GMP_FOUND
       MPFR_FOUND
@@ -123,7 +132,9 @@ set(APRON_INCLUDE_DIRS
   ${GMP_INCLUDE_DIR}
   ${GMPXX_INCLUDE_DIR}
   ${MPFR_INCLUDE_DIR}
-  ${PPL_INCLUDE_DIR})
+  ${FLINT_INCLUDE_DIR}
+  ${PPL_INCLUDE_DIR}
+  ${PPLITE_INCLUDE_DIR})
 
 set(APRON_LIBRARIES
   ${APRON_APRON_LIB}
@@ -131,8 +142,11 @@ set(APRON_LIBRARIES
   ${APRON_OCT_LIB}
   ${APRON_POLKA_LIB}
   ${APRON_PPL_LIB}
+  ${APRON_PPLITE_LIB}
   ${APRON_PKGRID_LIB}
   ${GMP_LIB}
   ${GMPXX_LIB}
   ${MPFR_LIB}
-  ${PPL_LIB})
+  ${FLINT_LIB}
+  ${PPL_LIB}
+  ${PPLITE_LIB})

@@ -76,6 +76,8 @@ MachineIntAbstractDomain make_top_machine_int_abstract_value(
       return make_top_machine_int_apron_polka_linear_equalities();
     case MachineIntDomainOption::ApronPplPolyhedra:
       return make_top_machine_int_apron_ppl_polyhedra();
+    case MachineIntDomainOption::ApronPplitePolyhedra:
+      return make_top_machine_int_apron_pplite_polyhedra();
     case MachineIntDomainOption::ApronPplLinearCongruences:
       return make_top_machine_int_apron_ppl_linear_congruences();
     case MachineIntDomainOption::ApronPkgridPolyhedraLinearCongruences:
@@ -88,6 +90,8 @@ MachineIntAbstractDomain make_top_machine_int_abstract_value(
       return make_top_machine_int_var_pack_apron_polka_linear_equalities();
     case MachineIntDomainOption::VarPackApronPplPolyhedra:
       return make_top_machine_int_var_pack_apron_ppl_polyhedra();
+    case MachineIntDomainOption::VarPackApronPplitePolyhedra:
+      return make_top_machine_int_var_pack_apron_pplite_polyhedra();
     case MachineIntDomainOption::VarPackApronPplLinearCongruences:
       return make_top_machine_int_var_pack_apron_ppl_linear_congruences();
     case MachineIntDomainOption::VarPackApronPkgridPolyhedraLinearCongruences:
@@ -127,6 +131,8 @@ MachineIntAbstractDomain make_bottom_machine_int_abstract_value(
       return make_bottom_machine_int_apron_polka_linear_equalities();
     case MachineIntDomainOption::ApronPplPolyhedra:
       return make_bottom_machine_int_apron_ppl_polyhedra();
+    case MachineIntDomainOption::ApronPplitePolyhedra:
+      return make_bottom_machine_int_apron_pplite_polyhedra();
     case MachineIntDomainOption::ApronPplLinearCongruences:
       return make_bottom_machine_int_apron_ppl_linear_congruences();
     case MachineIntDomainOption::ApronPkgridPolyhedraLinearCongruences:
@@ -139,6 +145,8 @@ MachineIntAbstractDomain make_bottom_machine_int_abstract_value(
       return make_bottom_machine_int_var_pack_apron_polka_linear_equalities();
     case MachineIntDomainOption::VarPackApronPplPolyhedra:
       return make_bottom_machine_int_var_pack_apron_ppl_polyhedra();
+    case MachineIntDomainOption::VarPackApronPplitePolyhedra:
+      return make_bottom_machine_int_var_pack_apron_pplite_polyhedra();
     case MachineIntDomainOption::VarPackApronPplLinearCongruences:
       return make_bottom_machine_int_var_pack_apron_ppl_linear_congruences();
     case MachineIntDomainOption::VarPackApronPkgridPolyhedraLinearCongruences:
