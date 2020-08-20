@@ -73,6 +73,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
 include(HandleOptions)
 
+# PPLite needs explicit enabling
+option (USE_PPLITE "Enable PPLite library" OFF)
+
 # Enable tests
 enable_testing()
 

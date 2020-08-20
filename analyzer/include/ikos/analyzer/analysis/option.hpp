@@ -76,16 +76,18 @@ enum class MachineIntDomainOption {
   ApronPolkaPolyhedra,
   ApronPolkaLinearEqualities,
   ApronPplPolyhedra,
-  ApronPplitePolyhedra,
   ApronPplLinearCongruences,
   ApronPkgridPolyhedraLinearCongruences,
   VarPackApronOctagon,
   VarPackApronPolkaPolyhedra,
   VarPackApronPolkaLinearEqualities,
   VarPackApronPplPolyhedra,
-  VarPackApronPplitePolyhedra,
   VarPackApronPplLinearCongruences,
   VarPackApronPkgridPolyhedraLinearCongruences,
+#ifdef HAS_PPLITE
+  ApronPplitePolyhedra,
+  VarPackApronPplitePolyhedra,
+#endif
 };
 
 /// \brief Return a string representing a MachineIntDomainOption
@@ -117,8 +119,6 @@ inline const char* machine_int_domain_option_str(MachineIntDomainOption d) {
       return "apron-polka-linear-equalities";
     case MachineIntDomainOption::ApronPplPolyhedra:
       return "apron-ppl-polyhedra";
-    case MachineIntDomainOption::ApronPplitePolyhedra:
-      return "apron-pplite-polyhedra";
     case MachineIntDomainOption::ApronPplLinearCongruences:
       return "apron-ppl-linear-congruences";
     case MachineIntDomainOption::ApronPkgridPolyhedraLinearCongruences:
@@ -131,12 +131,16 @@ inline const char* machine_int_domain_option_str(MachineIntDomainOption d) {
       return "var-pack-apron-polka-linear-equalities";
     case MachineIntDomainOption::VarPackApronPplPolyhedra:
       return "var-pack-apron-ppl-polyhedra";
-    case MachineIntDomainOption::VarPackApronPplitePolyhedra:
-      return "var-pack-apron-pplite-polyhedra";
     case MachineIntDomainOption::VarPackApronPplLinearCongruences:
       return "var-pack-apron-ppl-linear-congruences";
     case MachineIntDomainOption::VarPackApronPkgridPolyhedraLinearCongruences:
       return "var-pack-apron-pkgrid-polyhedra-lin-cong";
+#ifdef HAS_PPLITE
+    case MachineIntDomainOption::ApronPplitePolyhedra:
+      return "apron-pplite-polyhedra";
+    case MachineIntDomainOption::VarPackApronPplitePolyhedra:
+      return "var-pack-apron-pplite-polyhedra";
+#endif
     default: {
       ikos_unreachable("unreachable");
     }

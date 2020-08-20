@@ -97,6 +97,16 @@ include_directories(SYSTEM ${TBB_INCLUDE_DIRS})
 find_package(APRON)
 if (APRON_FOUND)
   include_directories(SYSTEM ${APRON_INCLUDE_DIRS})
+  add_definitions("-DHAS_APRON")
+endif()
+
+if (USE_PPLITE)
+  if (NOT APRON_FOUND)
+    message(FATAL_ERROR "PPLite requires Apron")
+  endif()
+  find_package(PPLite REQUIRED)
+  include_directories(SYSTEM ${PPLITE_INCLUDE_DIRS})
+  add_definitions("-DHAS_PPLITE")
 endif()
 
 #

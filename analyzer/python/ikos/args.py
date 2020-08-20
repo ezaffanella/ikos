@@ -224,8 +224,6 @@ domains = (
      'APRON Polka Linear Equalities domain'),
     ('apron-ppl-polyhedra',
      'APRON PPL Polyhedra domain'),
-    ('apron-pplite-polyhedra',
-     'APRON PPLite Polyhedra domain'),
     ('apron-ppl-linear-congruences',
      'APRON PPL Linear Congruences domain'),
     ('apron-pkgrid-polyhedra-lin-cong',
@@ -238,13 +236,15 @@ domains = (
      'APRON Polka Linear Equalities domain with variable packing'),
     ('var-pack-apron-ppl-polyhedra',
      'APRON PPL Polyhedra domain with variable packing'),
-    ('var-pack-apron-pplite-polyhedra',
-     'APRON PPLite Polyhedra domain with variable packing'),
     ('var-pack-apron-ppl-linear-congruences',
      'APRON PPL Linear Congruences domain with variable packing'),
     ('var-pack-apron-pkgrid-polyhedra-lin-cong',
      'APRON Pkgrid Polyhedra and Linear Congruences domain'
      ' with variable packing'),
+    ('apron-pplite-polyhedra',
+     'APRON PPLite Polyhedra domain'),
+    ('var-pack-apron-pplite-polyhedra',
+     'APRON PPLite Polyhedra domain with variable packing'),
 )
 
 default_domain = 'interval'

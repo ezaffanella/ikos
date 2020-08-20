@@ -108,6 +108,15 @@ if (APRON_FOUND)
   add_definitions("-DHAS_APRON")
 endif()
 
+if (USE_PPLITE)
+  if (NOT APRON_FOUND)
+    message(FATAL_ERROR "PPLite requires Apron")
+  endif()
+  find_package(PPLite REQUIRED)
+  include_directories(SYSTEM ${PPLITE_INCLUDE_DIRS})
+  add_definitions("-DHAS_PPLITE")
+endif()
+
 find_package(PythonInterp REQUIRED)
 
 find_package(Core REQUIRED)
@@ -303,6 +312,9 @@ target_link_libraries(ikos-analyzer
 )
 if (APRON_FOUND)
   target_link_libraries(ikos-analyzer ${APRON_LIBRARIES})
+endif()
+if (PPLITE_FOUND)
+  target_link_libraries(ikos-analyzer ${PPLITE_LIBRARIES})
 endif()
 install(TARGETS ikos-analyzer RUNTIME DESTINATION bin)
 

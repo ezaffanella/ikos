@@ -41,7 +41,7 @@
 ###############################################################################
 
 if (NOT PPLITE_FOUND)
-  set(PPLITE_ROOT "" CACHE PATH "Path to pplite install directory")
+  set(PPLITE_ROOT "" CACHE PATH "Path to PPLite install directory")
 
   set(PPLITE_INCLUDE_SEARCH_DIRS "")
   set(PPLITE_LIB_SEARCH_DIRS "")
@@ -51,31 +51,45 @@ if (NOT PPLITE_FOUND)
     list(APPEND PPLITE_LIB_SEARCH_DIRS "${PPLITE_ROOT}/lib")
   endif()
 
-  find_package(GMP)
-  find_package(FLINT)
+  find_package(GMP REQUIRED)
+  find_package(FLINT REQUIRED)
+  find_package(APRON REQUIRED)
 
   find_path(PPLITE_INCLUDE_DIR
     NAMES pplite/pplite.hh
     HINTS ${PPLITE_INCLUDE_SEARCH_DIRS}
-    DOC "Path to pplite include directory"
+    DOC "Path to PPLite include directory"
   )
 
   find_library(PPLITE_LIB
     NAMES pplite
     HINTS ${PPLITE_LIB_SEARCH_DIRS}
-    DOC "Path to pplite library"
+    DOC "Path to PPLite library"
+  )
+
+  find_path(AP_PPLITE_INCLUDE_DIR
+    NAMES ap_pplite.h
+    HINTS ${PPLITE_INCLUDE_SEARCH_DIRS}
+    DOC "Path to Apron PPLite's wrapper include directory"
+  )
+
+  find_library(AP_PPLITE_LIB
+    NAMES ap_pplite
+    HINTS ${PPLITE_LIB_SEARCH_DIRS}
+    DOC "Path to Apron PPLite's wrapper library ap_pplite"
   )
 
   if (PPLITE_INCLUDE_DIR AND PPLITE_LIB AND FLINT_FOUND AND GMP_FOUND)
     file(WRITE "${PROJECT_BINARY_DIR}/RunPPLite.cc" "
+      #include <ap_pplite.h>
       #include <cassert>
-      #include <cstdio>
-      #include <pplite/pplite.hh>
 
       int main() {
-        using namespace pplite;
-        Poly ph(1, Spec_Elem::EMPTY);
-        assert(ph.space_dim == 1 && ph.is_empty());
+        ap_manager_t* man = ap_pplite_poly_manager_alloc(false);
+        ap_abstract0_t* ph = ap_abstract0_bottom(man, 1, 0);
+        assert(ap_abstract0_is_bottom(man, ph));
+        assert(ap_abstract0_dimension(man, ph).intdim == 1);
+        assert(ap_abstract0_dimension(man, ph).realdim == 0);
         return 0;
       }
     ")
@@ -86,8 +100,8 @@ if (NOT PPLITE_FOUND)
       "${PROJECT_BINARY_DIR}"
       "${PROJECT_BINARY_DIR}/RunPPLite.cc"
       CMAKE_FLAGS
-        "-DINCLUDE_DIRECTORIES:STRING=${PPLITE_INCLUDE_DIR};${FLINT_INCLUDE_DIR};${GMP_INCLUDE_DIR}"
-        "-DLINK_LIBRARIES:STRING=${PPLITE_LIB};${FLINT_LIB};${GMP_LIB}"
+        "-DINCLUDE_DIRECTORIES:STRING=${APRON_INCLUDE_DIRS};${AP_PPLITE_INCLUDE_DIR};${PPLITE_INCLUDE_DIR};${FLINT_INCLUDE_DIR};${GMP_INCLUDE_DIR}"
+        "-DLINK_LIBRARIES:STRING=${APRON_LIBRARIES};${AP_PPLITE_LIB};${PPLITE_LIB};${FLINT_LIB};${GMP_LIB}"
       COMPILE_OUTPUT_VARIABLE COMPILE_OUTPUT
     )
 
@@ -104,12 +118,22 @@ if (NOT PPLITE_FOUND)
     REQUIRED_VARS
       PPLITE_INCLUDE_DIR
       PPLITE_LIB
+      AP_PPLITE_INCLUDE_DIR
+      AP_PPLITE_LIB
       FLINT_FOUND
       GMP_FOUND
     FAIL_MESSAGE
       "Could NOT find PPLite. Please provide -DPPLITE_ROOT=/path/to/pplite")
 endif()
 
+set(PPLITE_INCLUDE_DIRS
+  ${AP_PPLITE_INCLUDE_DIR}
+  ${PPLITE_INCLUDE_DIR}
+  ${FLINT_INCLUDE_DIR}
+  ${GMP_INCLUDE_DIR})
+
 set(PPLITE_LIBRARIES
+  ${AP_PPLITE_LIB}
   ${PPLITE_LIB}
-)
+  ${FLINT_LIB}
+  ${GMP_LIB})

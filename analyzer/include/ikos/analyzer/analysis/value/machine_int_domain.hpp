@@ -99,9 +99,6 @@ make_bottom_machine_int_apron_polka_linear_equalities();
 MachineIntAbstractDomain make_top_machine_int_apron_ppl_polyhedra();
 MachineIntAbstractDomain make_bottom_machine_int_apron_ppl_polyhedra();
 
-MachineIntAbstractDomain make_top_machine_int_apron_pplite_polyhedra();
-MachineIntAbstractDomain make_bottom_machine_int_apron_pplite_polyhedra();
-
 MachineIntAbstractDomain make_top_machine_int_apron_ppl_linear_congruences();
 MachineIntAbstractDomain make_bottom_machine_int_apron_ppl_linear_congruences();
 
@@ -125,11 +122,6 @@ MachineIntAbstractDomain make_top_machine_int_var_pack_apron_ppl_polyhedra();
 MachineIntAbstractDomain make_bottom_machine_int_var_pack_apron_ppl_polyhedra();
 
 MachineIntAbstractDomain
-make_top_machine_int_var_pack_apron_pplite_polyhedra();
-MachineIntAbstractDomain
-make_bottom_machine_int_var_pack_apron_pplite_polyhedra();
-
-MachineIntAbstractDomain
 make_top_machine_int_var_pack_apron_ppl_linear_congruences();
 MachineIntAbstractDomain
 make_bottom_machine_int_var_pack_apron_ppl_linear_congruences();
@@ -138,6 +130,15 @@ MachineIntAbstractDomain
 make_top_machine_int_var_pack_apron_pkgrid_polyhedra_lin_cong();
 MachineIntAbstractDomain
 make_bottom_machine_int_var_pack_apron_pkgrid_polyhedra_lin_cong();
+
+#ifdef HAS_PPLITE
+MachineIntAbstractDomain make_top_machine_int_apron_pplite_polyhedra();
+MachineIntAbstractDomain make_bottom_machine_int_apron_pplite_polyhedra();
+MachineIntAbstractDomain
+make_top_machine_int_var_pack_apron_pplite_polyhedra();
+MachineIntAbstractDomain
+make_bottom_machine_int_var_pack_apron_pplite_polyhedra();
+#endif
 
 /// @}
 

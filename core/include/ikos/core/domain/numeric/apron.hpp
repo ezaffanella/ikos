@@ -51,11 +51,14 @@
 #include <ap_global0.h>
 #include <ap_pkgrid.h>
 #include <ap_ppl.h>
-#include <ap_pplite.h>
 #include <box.h>
 #include <oct.h>
 #include <pk.h>
 #include <pkeq.h>
+
+#ifdef HAS_PPLITE
+#include <ap_pplite.h>
+#endif
 
 #include <ikos/core/adt/patricia_tree/map.hpp>
 #include <ikos/core/domain/numeric/abstract_domain.hpp>
@@ -185,9 +188,11 @@ enum Domain {
   PolkaPolyhedra,
   PolkaLinearEqualities,
   PplPolyhedra,
-  PplitePolyhedra,
   PplLinearCongruences,
   PkgridPolyhedraLinCongruences,
+#ifdef HAS_PPLITE
+  PplitePolyhedra,
+#endif
 };
 
 inline const char* domain_name(Domain d) {
@@ -202,13 +207,15 @@ inline const char* domain_name(Domain d) {
       return "APRON NewPolka Linear Equalities";
     case PplPolyhedra:
       return "APRON PPL Convex Polyhedra";
-    case PplitePolyhedra:
-      return "APRON PPLite Convex Polyhedra";
     case PplLinearCongruences:
       return "APRON PPL Linear Congruences";
     case PkgridPolyhedraLinCongruences:
       return "APRON Reduced Product of NewPolka Convex Polyhedra and PPL "
              "Linear Congruences";
+#ifdef HAS_PPLITE
+    case PplitePolyhedra:
+      return "APRON PPLite Convex Polyhedra";
+#endif
     default:
       ikos_unreachable("unexpected domain");
   }
@@ -226,13 +233,15 @@ inline ap_manager_t* alloc_domain_manager(Domain d) {
       return pkeq_manager_alloc();
     case PplPolyhedra:
       return ap_ppl_poly_manager_alloc(false);
-    case PplitePolyhedra:
-      return ap_pplite_poly_manager_alloc(false);
     case PplLinearCongruences:
       return ap_ppl_grid_manager_alloc();
     case PkgridPolyhedraLinCongruences:
       return ap_pkgrid_manager_alloc(pk_manager_alloc(false),
                                      ap_ppl_grid_manager_alloc());
+#ifdef HAS_PPLITE
+    case PplitePolyhedra:
+      return ap_pplite_poly_manager_alloc(false);
+#endif
     default:
       ikos_unreachable("unexpected domain");
   }
