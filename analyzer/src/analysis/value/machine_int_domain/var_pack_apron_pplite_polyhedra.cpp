@@ -1,7 +1,8 @@
 /*******************************************************************************
  *
  * \file
- * \brief Implement make_(top|bottom)_machine_int_var_pack_apron_pplite_polyhedra
+ * \brief Implement
+ * make_(top|bottom)_machine_int_var_pack_apron_pplite_polyhedra
  *
  * Author: Enea Zaffanella
  *
@@ -59,8 +60,9 @@ namespace {
 using RuntimeNumericDomain = core::numeric::VarPackingDomain<
     ZNumber,
     Variable*,
-    core::numeric::
-        ApronDomain< core::numeric::apron::PplitePolyhedra, ZNumber, Variable* > >;
+    core::numeric::ApronDomain< core::numeric::apron::PplitePolyhedra,
+                                ZNumber,
+                                Variable* > >;
 using RuntimeMachineIntDomain =
     core::machine_int::NumericDomainAdapter< Variable*, RuntimeNumericDomain >;
 

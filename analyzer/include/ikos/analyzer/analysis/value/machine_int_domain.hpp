@@ -134,8 +134,7 @@ make_bottom_machine_int_var_pack_apron_pkgrid_polyhedra_lin_cong();
 #ifdef HAS_PPLITE
 MachineIntAbstractDomain make_top_machine_int_apron_pplite_polyhedra();
 MachineIntAbstractDomain make_bottom_machine_int_apron_pplite_polyhedra();
-MachineIntAbstractDomain
-make_top_machine_int_var_pack_apron_pplite_polyhedra();
+MachineIntAbstractDomain make_top_machine_int_var_pack_apron_pplite_polyhedra();
 MachineIntAbstractDomain
 make_bottom_machine_int_var_pack_apron_pplite_polyhedra();
 #endif
