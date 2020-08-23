@@ -249,6 +249,22 @@ domains = (
 
 default_domain = 'interval'
 
+
+# For experimental purposes
+pplite_kinds = (
+    ('Poly', 'Convex polyhedra'),
+    ('F_Poly', 'Factored convex polyhedra'),
+    ('U_Poly', 'U_Wrap<Poly>'),
+    ('UF_Poly', 'U_Wrap<F_Poly>'),
+    ('Poly_Stats', 'Stats<Poly>'),
+    ('F_Poly_Stats', 'Stats<F_Poly>'),
+    ('U_Poly_Stats', 'Stats<U_Wrap<Poly>>'),
+    ('UF_Poly_Stats', 'Stats<U_Wrap<F_Poly>>'),
+)
+
+default_pplite_kind = 'Poly'
+
+
 globals_init_policies = (
     ('all', 'Initialize all global variables'),
     ('skip-big-arrays', 'Initialize all global variables except big arrays'),
