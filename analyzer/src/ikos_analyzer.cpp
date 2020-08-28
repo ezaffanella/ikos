@@ -815,7 +815,7 @@ static analyzer::AnalysisOptions make_analysis_options(ar::Bundle* bundle) {
 #ifdef HAS_PPLITE
   if (Domain == analyzer::MachineIntDomainOption::ApronPplitePolyhedra ||
       Domain == analyzer::MachineIntDomainOption::VarPackApronPplitePolyhedra)
-    ap_pplite_set_poly_kind(PpliteKind.c_str());
+    ap_pplite_set_kind(PpliteKind.c_str());
 #endif
   return analyzer::AnalysisOptions{
       .analyses = {Analyses.begin(), Analyses.end()},
