@@ -57,27 +57,78 @@ namespace value {
 
 namespace {
 
-using RuntimeNumericDomain = core::numeric::VarPackingDomain<
+using RND_Poly = core::numeric::VarPackingDomain<
     ZNumber,
     Variable*,
-    core::numeric::ApronDomain< core::numeric::apron::PplitePolyhedra,
+    core::numeric::ApronDomain< core::numeric::apron::PplitePoly,
                                 ZNumber,
                                 Variable* > >;
-using RuntimeMachineIntDomain =
-    core::machine_int::NumericDomainAdapter< Variable*, RuntimeNumericDomain >;
+using RMID_Poly =
+    core::machine_int::NumericDomainAdapter< Variable*, RND_Poly >;
+
+using RND_FPoly = core::numeric::VarPackingDomain<
+    ZNumber,
+    Variable*,
+    core::numeric::ApronDomain< core::numeric::apron::PpliteFPoly,
+                                ZNumber,
+                                Variable* > >;
+using RMID_FPoly =
+    core::machine_int::NumericDomainAdapter< Variable*, RND_FPoly >;
+
+using RND_UPoly = core::numeric::VarPackingDomain<
+    ZNumber,
+    Variable*,
+    core::numeric::ApronDomain< core::numeric::apron::PpliteUPoly,
+                                ZNumber,
+                                Variable* > >;
+using RMID_UPoly =
+    core::machine_int::NumericDomainAdapter< Variable*, RND_UPoly >;
+
+using RND_UFPoly = core::numeric::VarPackingDomain<
+    ZNumber,
+    Variable*,
+    core::numeric::ApronDomain< core::numeric::apron::PpliteUFPoly,
+                                ZNumber,
+                                Variable* > >;
+using RMID_UFPoly =
+    core::machine_int::NumericDomainAdapter< Variable*, RND_UFPoly >;
 
 } // end anonymous namespace
 
 MachineIntAbstractDomain
-make_top_machine_int_var_pack_apron_pplite_polyhedra() {
-  return MachineIntAbstractDomain(
-      RuntimeMachineIntDomain(RuntimeNumericDomain::top()));
+make_top_machine_int_var_pack_apron_pplite_poly() {
+  return MachineIntAbstractDomain(RMID_Poly(RND_Poly::top()));
+}
+MachineIntAbstractDomain
+make_bottom_machine_int_var_pack_apron_pplite_poly() {
+  return MachineIntAbstractDomain(RMID_Poly(RND_Poly::bottom()));
 }
 
 MachineIntAbstractDomain
-make_bottom_machine_int_var_pack_apron_pplite_polyhedra() {
-  return MachineIntAbstractDomain(
-      RuntimeMachineIntDomain(RuntimeNumericDomain::bottom()));
+make_top_machine_int_var_pack_apron_pplite_fpoly() {
+  return MachineIntAbstractDomain(RMID_FPoly(RND_FPoly::top()));
+}
+MachineIntAbstractDomain
+make_bottom_machine_int_var_pack_apron_pplite_fpoly() {
+  return MachineIntAbstractDomain(RMID_FPoly(RND_FPoly::bottom()));
+}
+
+MachineIntAbstractDomain
+make_top_machine_int_var_pack_apron_pplite_upoly() {
+  return MachineIntAbstractDomain(RMID_UPoly(RND_UPoly::top()));
+}
+MachineIntAbstractDomain
+make_bottom_machine_int_var_pack_apron_pplite_upoly() {
+  return MachineIntAbstractDomain(RMID_UPoly(RND_UPoly::bottom()));
+}
+
+MachineIntAbstractDomain
+make_top_machine_int_var_pack_apron_pplite_ufpoly() {
+  return MachineIntAbstractDomain(RMID_UFPoly(RND_UFPoly::top()));
+}
+MachineIntAbstractDomain
+make_bottom_machine_int_var_pack_apron_pplite_ufpoly() {
+  return MachineIntAbstractDomain(RMID_UFPoly(RND_UFPoly::bottom()));
 }
 
 } // end namespace value

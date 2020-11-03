@@ -85,8 +85,14 @@ enum class MachineIntDomainOption {
   VarPackApronPplLinearCongruences,
   VarPackApronPkgridPolyhedraLinearCongruences,
 #ifdef HAS_PPLITE
-  ApronPplitePolyhedra,
-  VarPackApronPplitePolyhedra,
+  ApronPplitePoly,
+  VarPackApronPplitePoly,
+  ApronPpliteFPoly,
+  VarPackApronPpliteFPoly,
+  ApronPpliteUPoly,
+  VarPackApronPpliteUPoly,
+  ApronPpliteUFPoly,
+  VarPackApronPpliteUFPoly,
 #endif
 };
 
@@ -136,10 +142,22 @@ inline const char* machine_int_domain_option_str(MachineIntDomainOption d) {
     case MachineIntDomainOption::VarPackApronPkgridPolyhedraLinearCongruences:
       return "var-pack-apron-pkgrid-polyhedra-lin-cong";
 #ifdef HAS_PPLITE
-    case MachineIntDomainOption::ApronPplitePolyhedra:
-      return "apron-pplite-polyhedra";
-    case MachineIntDomainOption::VarPackApronPplitePolyhedra:
-      return "var-pack-apron-pplite-polyhedra";
+    case MachineIntDomainOption::ApronPplitePoly:
+      return "apron-pplite-poly";
+    case MachineIntDomainOption::VarPackApronPplitePoly:
+      return "var-pack-apron-pplite-poly";
+    case MachineIntDomainOption::ApronPpliteFPoly:
+      return "apron-pplite-fpoly";
+    case MachineIntDomainOption::VarPackApronPpliteFPoly:
+      return "var-pack-apron-pplite-fpoly";
+    case MachineIntDomainOption::ApronPpliteUPoly:
+      return "apron-pplite-upoly";
+    case MachineIntDomainOption::VarPackApronPpliteUPoly:
+      return "var-pack-apron-pplite-upoly";
+    case MachineIntDomainOption::ApronPpliteUFPoly:
+      return "apron-pplite-ufpoly";
+    case MachineIntDomainOption::VarPackApronPpliteUFPoly:
+      return "var-pack-apron-pplite-ufpoly";
 #endif
     default: {
       ikos_unreachable("unreachable");

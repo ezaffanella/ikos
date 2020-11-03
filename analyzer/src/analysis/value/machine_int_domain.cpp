@@ -93,10 +93,22 @@ MachineIntAbstractDomain make_top_machine_int_abstract_value(
     case MachineIntDomainOption::VarPackApronPkgridPolyhedraLinearCongruences:
       return make_top_machine_int_var_pack_apron_pkgrid_polyhedra_lin_cong();
 #ifdef HAS_PPLITE
-    case MachineIntDomainOption::ApronPplitePolyhedra:
-      return make_top_machine_int_apron_pplite_polyhedra();
-    case MachineIntDomainOption::VarPackApronPplitePolyhedra:
-      return make_top_machine_int_var_pack_apron_pplite_polyhedra();
+    case MachineIntDomainOption::ApronPplitePoly:
+      return make_top_machine_int_apron_pplite_poly();
+    case MachineIntDomainOption::VarPackApronPplitePoly:
+      return make_top_machine_int_var_pack_apron_pplite_poly();
+    case MachineIntDomainOption::ApronPpliteFPoly:
+      return make_top_machine_int_apron_pplite_fpoly();
+    case MachineIntDomainOption::VarPackApronPpliteFPoly:
+      return make_top_machine_int_var_pack_apron_pplite_fpoly();
+    case MachineIntDomainOption::ApronPpliteUPoly:
+      return make_top_machine_int_apron_pplite_upoly();
+    case MachineIntDomainOption::VarPackApronPpliteUPoly:
+      return make_top_machine_int_var_pack_apron_pplite_upoly();
+    case MachineIntDomainOption::ApronPpliteUFPoly:
+      return make_top_machine_int_apron_pplite_ufpoly();
+    case MachineIntDomainOption::VarPackApronPpliteUFPoly:
+      return make_top_machine_int_var_pack_apron_pplite_ufpoly();
 #endif
     default: {
       ikos_unreachable("unreachable");
@@ -150,10 +162,22 @@ MachineIntAbstractDomain make_bottom_machine_int_abstract_value(
     case MachineIntDomainOption::VarPackApronPkgridPolyhedraLinearCongruences:
       return make_bottom_machine_int_var_pack_apron_pkgrid_polyhedra_lin_cong();
 #ifdef HAS_PPLITE
-    case MachineIntDomainOption::ApronPplitePolyhedra:
-      return make_bottom_machine_int_apron_pplite_polyhedra();
-    case MachineIntDomainOption::VarPackApronPplitePolyhedra:
-      return make_bottom_machine_int_var_pack_apron_pplite_polyhedra();
+    case MachineIntDomainOption::ApronPplitePoly:
+      return make_bottom_machine_int_apron_pplite_poly();
+    case MachineIntDomainOption::VarPackApronPplitePoly:
+      return make_bottom_machine_int_var_pack_apron_pplite_poly();
+    case MachineIntDomainOption::ApronPpliteFPoly:
+      return make_bottom_machine_int_apron_pplite_fpoly();
+    case MachineIntDomainOption::VarPackApronPpliteFPoly:
+      return make_bottom_machine_int_var_pack_apron_pplite_fpoly();
+    case MachineIntDomainOption::ApronPpliteUPoly:
+      return make_bottom_machine_int_apron_pplite_upoly();
+    case MachineIntDomainOption::VarPackApronPpliteUPoly:
+      return make_bottom_machine_int_var_pack_apron_pplite_upoly();
+    case MachineIntDomainOption::ApronPpliteUFPoly:
+      return make_bottom_machine_int_apron_pplite_ufpoly();
+    case MachineIntDomainOption::VarPackApronPpliteUFPoly:
+      return make_bottom_machine_int_var_pack_apron_pplite_ufpoly();
 #endif
     default: {
       ikos_unreachable("unreachable");

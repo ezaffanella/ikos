@@ -94,10 +94,6 @@
 #include <ikos/analyzer/util/log.hpp>
 #include <ikos/analyzer/util/timer.hpp>
 
-#ifdef HAS_PPLITE
-#include <ap_pplite.h>
-#endif
-
 namespace ar = ikos::ar;
 namespace llvm_to_ar = ikos::frontend::import;
 namespace analyzer = ikos::analyzer;
@@ -325,30 +321,49 @@ static llvm::cl::opt< analyzer::MachineIntDomainOption > Domain(
                    "variable packing")
 #ifdef HAS_PPLITE
             ,
-        clEnumValN(analyzer::MachineIntDomainOption::ApronPplitePolyhedra,
+        clEnumValN(analyzer::MachineIntDomainOption::ApronPplitePoly,
                    machine_int_domain_option_str(
-                       analyzer::MachineIntDomainOption::ApronPplitePolyhedra),
-                   "APRON PPLite Polyhedra domain"),
+                       analyzer::MachineIntDomainOption::ApronPplitePoly),
+                   "APRON PPLite Poly domain"),
         clEnumValN(
-            analyzer::MachineIntDomainOption::VarPackApronPplitePolyhedra,
+            analyzer::MachineIntDomainOption::VarPackApronPplitePoly,
             machine_int_domain_option_str(
-                analyzer::MachineIntDomainOption::VarPackApronPplitePolyhedra),
-            "APRON PPLite Polyhedra domain with variable packing")
+                analyzer::MachineIntDomainOption::VarPackApronPplitePoly),
+            "APRON PPLite Poly domain with variable packing")
+            ,
+        clEnumValN(analyzer::MachineIntDomainOption::ApronPpliteFPoly,
+                   machine_int_domain_option_str(
+                       analyzer::MachineIntDomainOption::ApronPpliteFPoly),
+                   "APRON PPLite F_Poly domain"),
+        clEnumValN(
+            analyzer::MachineIntDomainOption::VarPackApronPpliteFPoly,
+            machine_int_domain_option_str(
+                analyzer::MachineIntDomainOption::VarPackApronPpliteFPoly),
+            "APRON PPLite F_Poly domain with variable packing")
+            ,
+        clEnumValN(analyzer::MachineIntDomainOption::ApronPpliteUPoly,
+                   machine_int_domain_option_str(
+                       analyzer::MachineIntDomainOption::ApronPpliteUPoly),
+                   "APRON PPLite U_Poly domain"),
+        clEnumValN(
+            analyzer::MachineIntDomainOption::VarPackApronPpliteUPoly,
+            machine_int_domain_option_str(
+                analyzer::MachineIntDomainOption::VarPackApronPpliteUPoly),
+            "APRON PPLite U_Poly domain with variable packing")
+            ,
+        clEnumValN(analyzer::MachineIntDomainOption::ApronPpliteUFPoly,
+                   machine_int_domain_option_str(
+                       analyzer::MachineIntDomainOption::ApronPpliteUFPoly),
+                   "APRON PPLite UF_Poly domain"),
+        clEnumValN(
+            analyzer::MachineIntDomainOption::VarPackApronPpliteUFPoly,
+            machine_int_domain_option_str(
+                analyzer::MachineIntDomainOption::VarPackApronPpliteUFPoly),
+            "APRON PPLite UF_Poly domain with variable packing")
 #endif
             ),
     llvm::cl::init(analyzer::MachineIntDomainOption::Interval),
     llvm::cl::cat(AnalysisCategory));
-
-#ifdef HAS_PPLITE
-static llvm::cl::opt< std::string > PpliteKind(
-    "k",
-    llvm::cl::desc("PPLite polyhedra domain kind: "
-                   "Poly (default), F_Poly, U_Poly, UF_Poly, "
-                   "Poly_Stats, F_Poly_Stats, U_Poly_Stats, UF_Poly_Stats"),
-    llvm::cl::value_desc("name"),
-    llvm::cl::init("Poly"),
-    llvm::cl::cat(AnalysisCategory));
-#endif
 
 static llvm::cl::list< std::string > EntryPoints(
     "entry-points",
@@ -812,11 +827,6 @@ parse_function_names_to_unsigned(const llvm::cl::list< std::string >& opt,
 
 /// \brief Build analysis options from command line arguments
 static analyzer::AnalysisOptions make_analysis_options(ar::Bundle* bundle) {
-#ifdef HAS_PPLITE
-  if (Domain == analyzer::MachineIntDomainOption::ApronPplitePolyhedra ||
-      Domain == analyzer::MachineIntDomainOption::VarPackApronPplitePolyhedra)
-    ap_pplite_set_kind(PpliteKind.c_str());
-#endif
   return analyzer::AnalysisOptions{
       .analyses = {Analyses.begin(), Analyses.end()},
       .entry_points = parse_function_names(EntryPoints, bundle),

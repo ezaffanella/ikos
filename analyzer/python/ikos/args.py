@@ -241,28 +241,25 @@ domains = (
     ('var-pack-apron-pkgrid-polyhedra-lin-cong',
      'APRON Pkgrid Polyhedra and Linear Congruences domain'
      ' with variable packing'),
-    ('apron-pplite-polyhedra',
-     'APRON PPLite Polyhedra domain'),
-    ('var-pack-apron-pplite-polyhedra',
-     'APRON PPLite Polyhedra domain with variable packing'),
+    ('apron-pplite-poly',
+     'APRON PPLite Poly domain'),
+    ('var-pack-apron-pplite-poly',
+     'APRON PPLite Poly domain with variable packing'),
+    ('apron-pplite-fpoly',
+     'APRON PPLite F_Poly domain'),
+    ('var-pack-apron-pplite-fpoly',
+     'APRON PPLite F_Poly domain with variable packing'),
+    ('apron-pplite-upoly',
+     'APRON PPLite U_Poly domain'),
+    ('var-pack-apron-pplite-upoly',
+     'APRON PPLite U_Poly domain with variable packing'),
+    ('apron-pplite-ufpoly',
+     'APRON PPLite UF_Poly domain'),
+    ('var-pack-apron-pplite-ufpoly',
+     'APRON PPLite UF_Poly domain with variable packing'),
 )
 
 default_domain = 'interval'
-
-
-# For experimental purposes
-pplite_kinds = (
-    ('Poly', 'Convex polyhedra'),
-    ('F_Poly', 'Factored convex polyhedra'),
-    ('U_Poly', 'U_Wrap<Poly>'),
-    ('UF_Poly', 'U_Wrap<F_Poly>'),
-    ('Poly_Stats', 'Stats<Poly>'),
-    ('F_Poly_Stats', 'Stats<F_Poly>'),
-    ('U_Poly_Stats', 'Stats<U_Wrap<Poly>>'),
-    ('UF_Poly_Stats', 'Stats<U_Wrap<F_Poly>>'),
-)
-
-default_pplite_kind = 'Poly'
 
 
 globals_init_policies = (

@@ -191,7 +191,10 @@ enum Domain {
   PplLinearCongruences,
   PkgridPolyhedraLinCongruences,
 #ifdef HAS_PPLITE
-  PplitePolyhedra,
+  PplitePoly,
+  PpliteFPoly,
+  PpliteUPoly,
+  PpliteUFPoly,
 #endif
 };
 
@@ -213,8 +216,14 @@ inline const char* domain_name(Domain d) {
       return "APRON Reduced Product of NewPolka Convex Polyhedra and PPL "
              "Linear Congruences";
 #ifdef HAS_PPLITE
-    case PplitePolyhedra:
-      return "APRON PPLite Convex Polyhedra";
+    case PplitePoly:
+      return "APRON PPLite Poly (convex polyhedra)";
+    case PpliteFPoly:
+      return "APRON PPLite F_Poly (cartesian factoring)";
+    case PpliteUPoly:
+      return "APRON PPLite U_Poly (unconstrained dims)";
+    case PpliteUFPoly:
+      return "APRON PPLite UF_Poly (unconstrained + factoring)";
 #endif
     default:
       ikos_unreachable("unexpected domain");
@@ -222,6 +231,30 @@ inline const char* domain_name(Domain d) {
 }
 
 inline ap_manager_t* alloc_domain_manager(Domain d) {
+
+#ifdef HAS_PPLITE
+  auto PpliteMakeHelper = [](Domain d) {
+    auto man = ap_pplite_poly_manager_alloc(false);
+    switch (d) {
+    case PplitePoly:
+      ap_pplite_poly_manager_set_kind(man, "Poly");
+      break;
+    case PpliteFPoly:
+      ap_pplite_poly_manager_set_kind(man, "F_Poly");
+      break;
+    case PpliteUPoly:
+      ap_pplite_poly_manager_set_kind(man, "U_Poly");
+      break;
+    case PpliteUFPoly:
+      ap_pplite_poly_manager_set_kind(man, "UF_Poly");
+      break;
+    default:
+      ikos_unreachable("unexpected PPLite kind");
+    }
+    return man;
+  };
+#endif // HAS_PPLITE
+
   switch (d) {
     case Interval:
       return box_manager_alloc();
@@ -239,9 +272,12 @@ inline ap_manager_t* alloc_domain_manager(Domain d) {
       return ap_pkgrid_manager_alloc(pk_manager_alloc(false),
                                      ap_ppl_grid_manager_alloc());
 #ifdef HAS_PPLITE
-    case PplitePolyhedra:
-      return ap_pplite_poly_manager_alloc(false);
-#endif
+    case PplitePoly:
+    case PpliteFPoly:
+    case PpliteUPoly:
+    case PpliteUFPoly:
+      return PpliteMakeHelper(d);
+#endif // HAS_PPLITE
     default:
       ikos_unreachable("unexpected domain");
   }

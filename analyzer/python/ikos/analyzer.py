@@ -115,14 +115,6 @@ def parse_arguments(argv):
                                          args.default_domain),
                           choices=args.choices(args.domains),
                           default=args.default_domain)
-    analysis.add_argument('-k', '--pplite-kind',
-                          dest='pplite_kind',
-                          metavar='',
-                          help=args.help('Available PPLite polyhedra kinds:',
-                                         args.pplite_kinds,
-                                         args.default_pplite_kind),
-                          choices=args.choices(args.pplite_kinds),
-                          default=args.default_pplite_kind)
     analysis.add_argument('-e', '--entry-points',
                           dest='entry_points',
                           metavar='<function>',
@@ -776,7 +768,6 @@ def ikos_analyzer(db_path, pp_path, opt):
     # analysis options
     cmd += ['-a=%s' % ','.join(opt.analyses),
             '-d=%s' % opt.domain,
-            '-k=%s' % opt.pplite_kind,
             '-entry-points=%s' % ','.join(opt.entry_points),
             '-globals-init=%s' % opt.globals_init,
             '-proc=%s' % opt.procedural,
